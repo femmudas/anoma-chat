@@ -95,4 +95,25 @@ document.getElementById('decrypted').innerText = decrypted;
     }
   </script>
 </body>
+
 </html>
+
+<script>
+  async function connectWallet() {
+    if (window.ethereum) {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const account = accounts[0];
+        document.getElementById('walletAddress').innerText = `Connected: ${account}`;
+        // Burada Anoma node bağlantısı veya işlemler başlatılabilir
+      } catch (error) {
+        console.error("Wallet connection failed:", error);
+      }
+    } else {
+      alert("Please install MetaMask or another wallet.");
+    }
+  }
+</script>
+
+<button onclick="connectWallet()">Connect Wallet</button>
+<p id="walletAddress">Not connected</p>
